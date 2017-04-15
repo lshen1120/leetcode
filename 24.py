@@ -6,16 +6,24 @@
 
 class Solution(object):
     def swapPairs(self, head):
-        if head == None:
-            return None
-        if head.next:
-            a = head
-            b = head.next
-            c = b.next
-            b.next = a
-            a.next = self.swapPairs(c)
-            return b
-        return head
+        node = head
+        result = head
+        prev = None
+        while node and node.next:
+            left = node
+            right = node.next
+            bnext = right.next
+            # swap
+            left.next = bnext
+            right.next = left
+            node = bnext
+            if prev:
+                prev.next = right
+            prev = left
+            if result ==head:
+                result=right
+
+        return result
         """
         :type head: ListNode
         :rtype: ListNode
